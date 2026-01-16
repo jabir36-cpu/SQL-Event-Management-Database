@@ -2,14 +2,14 @@ CREATE DATABASE event;
 USE event;
 --
 
-
+-- Stores venue details such as venue name and seating capacity.--
 CREATE TABLE venues (
 venue_id INT AUTO_INCREMENT PRIMARY KEY,    name VARCHAR(40) NOT NULL,
 capacity INT NOT NULL
 );
 SHOW TABLES;
 
---
+-- Stores event organizer details and Each organizer has a unique email.--
 CREATE TABLE organizers
 (org_id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(100) NOT NULL,
 Email VARCHAR(100) UNIQUE);
@@ -124,7 +124,7 @@ GROUP BY e.event_id, e.name, e.price;
 
 SELECT * FROM events WHERE event_date> CURDATE();
 
-
+-- The view combines data from multiple tables to show complete event details in one place.--
 CREATE VIEW event_details AS
 SELECT
  e.event_id,
@@ -136,10 +136,11 @@ SELECT
 FROM events e 
 JOIN venues v ON e.venue_id=v.venue_id
 	JOIN organizers o ON e.org_id = o.org_id;
+-- Displays all events in an organized manner.--
     
     SELECT * FROM event_details ORDER BY event_id;
     
-    
+    -- Returns all events organized by a specific organizer.--
     DELIMITER $$
     CREATE PROCEDURE gets_events_by_organizer(IN OrgName varchar(100))
     
@@ -148,6 +149,7 @@ JOIN venues v ON e.venue_id=v.venue_id
     END $$
     
     DELIMITER ;
+-- Fetches events handled by TechMeetup Org.--
     CALL gets_events_by_organizer('TechMeetup Org');
     
     
