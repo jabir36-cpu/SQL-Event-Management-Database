@@ -1,5 +1,5 @@
 # SQL-Event-Management-Database
-This is a mini event management system using MySQL and dataset are artificialy created for the purpose of practising. 
+This is a event management system using MySQL and dataset are artificialy created for the purpose of practising. 
 
 ## Features
 - Tables: Venues, Organizers, Events, Attendees
